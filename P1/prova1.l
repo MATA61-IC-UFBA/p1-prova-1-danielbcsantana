@@ -17,6 +17,8 @@ IDT        {LETTER}({LETTER}|{DIGIT}|_)*
 
 [ |\t]                      { /* skip whitespace */ }
 
+"//".*                  ;
+
 {DIGIT}+"."{DIGIT}+         {
                              isDouble = true;
                              yyval_num = atof(yytext); 
