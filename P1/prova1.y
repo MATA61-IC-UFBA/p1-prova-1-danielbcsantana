@@ -10,6 +10,7 @@ void yyerror(const char *msg);
 %}
 
 %token EOL 0
+%token ID
 %token L_PAR
 %token R_PAR
 %token PLUS
