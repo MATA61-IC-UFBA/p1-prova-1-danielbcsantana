@@ -1,45 +1,48 @@
+%option noyywrap
 %{
-#include <stdio.h>
+#include "prova1.tab.h"
 #include <stdlib.h>
 #include <string.h>
 
-extern int yylex();
-extern int yyparse();
+double yyval_num;
+bool isDouble; 
+
 void yyerror(const char *msg);
-
+int yylex();
 %}
+DIGIT   [0-9]
 
-%token EOL 0
-%token L_PAR
-%token R_PAR
-%token PLUS
-%token MINUS
-%token TIMES
-%token DIV
-%token ERROR
-%token NUM
-
-%start program
 
 %%
 
-/* programa */
-program
-: stmt_list 
-;
+[ |\t]                      { /* skip whitespace */ }
 
-stmt_list
-: stmt
-| stmt_list stmt
-;
+{DIGIT}+"."{DIGIT}+         {
+                             isDouble = true;
+                             yyval_num = atof(yytext); 
+                             return NUM;  
+                            }
 
-stmt
-: IDENT ASSIGN expr
-| PRINT LPAREN exprlist RPAREN
-| expr
-;
+{DIGIT}+                    {
+                             isDouble = false;
+                             yyval_num = atoi(yytext);    
+                             return NUM;
+                            }
 
-expr
-/* completar */
+"("                         {return L_PAR;}
+
+")"                         {return R_PAR;}
+
+"+"                         {return PLUS;}
+
+"-"                         {return MINUS;}
+
+"*"                         {return TIMES;}
+
+"/"                         {return DIV;}
+
+\n                          {return EOL;}
+
+.                           { return ERROR; }
 
 %%
