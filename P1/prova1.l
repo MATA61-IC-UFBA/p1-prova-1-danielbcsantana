@@ -29,7 +29,7 @@ IDT        {LETTER}({LETTER}|{DIGIT}|_)*
                              return NUM;
                             }
 
-{IDT}                   { return ID; }
+{IDT}                       {return ID;}
 
 "("                         {return L_PAR;}
 
