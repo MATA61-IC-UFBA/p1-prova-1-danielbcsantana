@@ -40,6 +40,14 @@ stmt
 ;
 
 expr
+: expr PLUS expr   |
+  expr MINUS expr  |
+  expr TIMES expr  |
+  expr DIV expr    |
+  L_PAR expr R_PAR |
+  NUM
+;
+
 /* completar */
 
 %%
