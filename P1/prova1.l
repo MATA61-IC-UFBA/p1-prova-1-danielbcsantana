@@ -11,8 +11,8 @@ void yyerror(const char *msg);
 int yylex();
 %}
 DIGIT   [0-9]
-
-
+LETTER     [A-Za-z]
+IDT        {LETTER}({LETTER}|{DIGIT}|_)*
 %%
 
 [ |\t]                      { /* skip whitespace */ }
@@ -28,6 +28,8 @@ DIGIT   [0-9]
                              yyval_num = atoi(yytext);    
                              return NUM;
                             }
+
+{IDT}                   { return ID; }
 
 "("                         {return L_PAR;}
 
