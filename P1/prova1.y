@@ -35,7 +35,7 @@ stmt_list
 ;
 
 stmt
-: IDT ASSIGN expr
+: ID ASSIGN expr
 | PRINT LPAREN exprlist RPAREN
 | expr
 ;
