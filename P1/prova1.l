@@ -13,6 +13,7 @@ int yylex();
 DIGIT   [0-9]
 LETTER     [A-Za-z]
 IDT        {LETTER}({LETTER}|{DIGIT}|_)*
+STRING     \"[^\"\n]*\"
 %%
 
 [ |\t]                      { /* skip whitespace */ }
@@ -44,6 +45,14 @@ IDT        {LETTER}({LETTER}|{DIGIT}|_)*
 "*"                         {return TIMES;}
 
 "/"                         {return DIV;}
+
+{STRING}                    {return STRING;}
+
+print                       {return print;}
+
+concat                      {return concat;}
+
+length                      {return length;}
 
 \n                          {return EOL;}
 
