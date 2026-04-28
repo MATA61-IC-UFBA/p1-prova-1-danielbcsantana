@@ -26,6 +26,9 @@ void yyerror(const char *msg);
 %token ERROR
 %token NUM
 
+%left PLUS MINUS
+%left TIMES DIV
+
 %start program
 
 %%
