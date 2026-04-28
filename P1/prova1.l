@@ -13,7 +13,7 @@ int yylex();
 DIGIT   [0-9]
 LETTER     [A-Za-z]
 IDT        {LETTER}({LETTER}|{DIGIT}|_)*
-STRING     \"[^\"\n]*\"
+STRING     \"[^\"]*\"
 %%
 
 [ |\t]                      { /* skip whitespace */ }
@@ -46,13 +46,17 @@ STRING     \"[^\"\n]*\"
 
 "/"                         {return DIV;}
 
+","                         {return COMMA;}
+
+"="                         {return ASSIGN;}
+
 {STRING}                    {return STRING;}
 
-print                       {return print;}
+"print"                     {return PRINT;}
 
-concat                      {return concat;}
+"concat"                     {return CONCAT;}
 
-length                      {return length;}
+"length"                     {return LENGTH;}
 
 \n                          {return EOL;}
 
