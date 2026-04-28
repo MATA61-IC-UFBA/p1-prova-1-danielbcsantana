@@ -42,7 +42,7 @@ stmt_list
 
 stmt
 : ID ASSIGN expr
-| PRINT L_PAR exprlist R_PAR
+| PRINT L_PAR expr_list R_PAR
 | expr
 ;
 
