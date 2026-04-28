@@ -32,8 +32,6 @@ STRING     \"[^\"]*\"
                              return NUM;
                             }
 
-{IDT}                       {return ID;}
-
 "("                         {return L_PAR;}
 
 ")"                         {return R_PAR;}
@@ -57,6 +55,8 @@ STRING     \"[^\"]*\"
 "concat"                     {return CONCAT;}
 
 "length"                     {return LENGTH;}
+
+{IDT}                        {return ID;}
 
 \n                          {return EOL;}
 
