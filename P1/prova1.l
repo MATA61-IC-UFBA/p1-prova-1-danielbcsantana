@@ -3,63 +3,39 @@
 #include "prova1.tab.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
-
-double yyval_num;
-bool isDouble; 
 
 void yyerror(const char *msg);
 int yylex();
 %}
+
 DIGIT   [0-9]
-LETTER     [A-Za-z]
-IDT        {LETTER}({LETTER}|{DIGIT}|_)*
-STRING     \"[^\"]*\"
+LETTER  [A-Za-z]
+IDT     {LETTER}({LETTER}|{DIGIT}|_)*
+
 %%
 
-[ |\t]                      { /* skip whitespace */ }
+[ \t\n]+                    { /* Ignora espaços, tabs e QUEBRAS DE LINHA */ }
 
-\/\/[^\n]*                  ;
+\/\/[^\n]* { /* Ignora comentários */ }
 
-{DIGIT}+"."{DIGIT}+         {
-                             isDouble = true;
-                             yyval_num = atof(yytext); 
-                             return NUM;  
-                            }
+{DIGIT}+("."{DIGIT}+)?      { return NUM; }
 
-{DIGIT}+                    {
-                             isDouble = false;
-                             yyval_num = atoi(yytext);    
-                             return NUM;
-                            }
+"print"                     { return PRINT; }
+"concat"                    { return CONCAT; }
+"length"                    { return LENGTH; }
 
-"("                         {return L_PAR;}
+{IDT}                       { return ID; }
 
-")"                         {return R_PAR;}
+\"[^\"]*\"                  { return STRING; }
 
-"+"                         {return PLUS;}
-
-"-"                         {return MINUS;}
-
-"*"                         {return TIMES;}
-
-"/"                         {return DIV;}
-
-","                         {return COMMA;}
-
-"="                         {return ASSIGN;}
-
-{STRING}                    {return STRING;}
-
-"print"                     {return PRINT;}
-
-"concat"                     {return CONCAT;}
-
-"length"                     {return LENGTH;}
-
-{IDT}                        {return ID;}
-
-\n                          {return EOL;}
+"("                         { return L_PAR; }
+")"                         { return R_PAR; }
+"+"                         { return PLUS; }
+"-"                         { return MINUS; }
+"*"                         { return TIMES; }
+"/"                         { return DIV; }
+","                         { return COMMA; }
+"="                         { return ASSIGN; }
 
 .                           { return ERROR; }
 
