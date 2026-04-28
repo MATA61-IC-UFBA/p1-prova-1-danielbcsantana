@@ -18,7 +18,7 @@ STRING     \"[^\"]*\"
 
 [ |\t]                      { /* skip whitespace */ }
 
-"//".*                  ;
+\/\/[^\n]*                  ;
 
 {DIGIT}+"."{DIGIT}+         {
                              isDouble = true;
